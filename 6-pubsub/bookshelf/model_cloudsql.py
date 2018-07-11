@@ -47,6 +47,7 @@ class Report(db.Model):
     crime = db.Column(db.String(4096))
     createdBy = db.Column(db.String(255))
     createdById = db.Column(db.String(255))
+    location = db.Column(db.String(255))
 
     def __repr__(self):
         return "<Report(crime='%s', gender=%s)" % (self.crime, self.gender)
