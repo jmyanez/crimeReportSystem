@@ -26,7 +26,7 @@ app = bookshelf.create_app(config)
 # If you were using another task queue, such as celery or rq, you can use this
 # section to configure your queues to work with Flask.
 with app.app_context():
-    books_queue = bookshelf.tasks.get_books_queue()
+    reports_queue = bookshelf.tasks.get_reports_queue()
 # [END books_queue]
 
 

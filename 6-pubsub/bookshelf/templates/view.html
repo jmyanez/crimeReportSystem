@@ -44,7 +44,7 @@
       {{report.crime}}
       <small>{{report.date}}</small>
     </h4>
-    <h5 class="report-crime">By {{report.crime|default('Unknown', True)}}</h5>
+    <h5 class="report-crime">By {{report.gender|default('Unknown', True)}}</h5>
     <p class="report-description">{{report.description}}</p>
     <small class="report-added-by">Added by {{report.createdBy|default('Anonymous', True)}}</small>
   </div>

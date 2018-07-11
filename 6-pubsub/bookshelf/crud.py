@@ -96,9 +96,7 @@ def add():
         report = get_model().create(data)
 
         # [START enqueue]
-        q = tasks.get_reports_queue()
-        q.enqueue(tasks.process_report, report['id'])
-        # [END enqueue]
+
 
         return redirect(url_for('.view', id=report['id']))
 

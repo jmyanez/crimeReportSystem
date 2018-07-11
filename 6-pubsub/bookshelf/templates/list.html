@@ -27,16 +27,9 @@
 {% for report in reports %}
 <div class="media">
   <a href="/reports/{{report.id}}">
-    <div class="media-left">
-      {% if report.imageUrl %}
-        <img src="{{report.imageUrl}}">
-      {% else %}
-        <img src="http://placekitten.com/g/128/192">
-      {% endif %}
-    </div>
     <div class="media-body">
       <h4>{{report.crime}}</h4>
-      <p>{{report.crime}}</p>
+      <p>{{report.date}}</p>
     </div>
   </a>
 </div>
