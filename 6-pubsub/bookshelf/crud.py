@@ -46,11 +46,11 @@ def list():
     if token:
         token = token.encode('utf-8')
 
-    books, next_page_token = get_model().list(cursor=token)
+    reports, next_page_token = get_model().list(cursor=token)
 
     return render_template(
         "list.html",
-        books=books,
+        reports=reports,
         next_page_token=next_page_token)
 
 
@@ -61,20 +61,20 @@ def list_mine():
     if token:
         token = token.encode('utf-8')
 
-    books, next_page_token = get_model().list_by_user(
+    reports, next_page_token = get_model().list_by_user(
         user_id=session['profile']['id'],
         cursor=token)
 
     return render_template(
         "list.html",
-        books=books,
+        reports=reports,
         next_page_token=next_page_token)
 
 
 @crud.route('/<id>')
 def view(id):
-    book = get_model().read(id)
-    return render_template("view.html", book=book)
+    report = get_model().read(id)
+    return render_template("view.html", report=report)
 
 
 @crud.route('/add', methods=['GET', 'POST'])
@@ -93,21 +93,21 @@ def add():
             data['createdBy'] = session['profile']['displayName']
             data['createdById'] = session['profile']['id']
 
-        book = get_model().create(data)
+        report = get_model().create(data)
 
         # [START enqueue]
-        q = tasks.get_books_queue()
-        q.enqueue(tasks.process_book, book['id'])
+        q = tasks.get_reports_queue()
+        q.enqueue(tasks.process_report, report['id'])
         # [END enqueue]
 
-        return redirect(url_for('.view', id=book['id']))
+        return redirect(url_for('.view', id=report['id']))
 
-    return render_template("form.html", action="Add", book={})
+    return render_template("form.html", action="Add", report={})
 
 
 @crud.route('/<id>/edit', methods=['GET', 'POST'])
 def edit(id):
-    book = get_model().read(id)
+    report = get_model().read(id)
 
     if request.method == 'POST':
         data = request.form.to_dict(flat=True)
@@ -117,14 +117,14 @@ def edit(id):
         if image_url:
             data['imageUrl'] = image_url
 
-        book = get_model().update(data, id)
+        report = get_model().update(data, id)
 
-        q = tasks.get_books_queue()
-        q.enqueue(tasks.process_book, book['id'])
+        q = tasks.get_reports_queue()
+        q.enqueue(tasks.process_report, report['id'])
 
-        return redirect(url_for('.view', id=book['id']))
+        return redirect(url_for('.view', id=report['id']))
 
-    return render_template("form.html", action="Edit", book=book)
+    return render_template("form.html", action="Edit", report=report)
 
 
 @crud.route('/<id>/delete')

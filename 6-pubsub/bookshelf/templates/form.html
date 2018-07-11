@@ -21,48 +21,40 @@
 <link rel="stylesheet" href="css/style.css">
 <form method="POST" enctype="multipart/form-data">
   <div class="form-group">
-    <label for="title">Delito</label>
-      <select name="title" value="{{book.title}}" id="title" class="form-control">
+    <label for="crime">Delito</label>
+      <select name="crime" value="{{report.crime}}" id="crime" class="form-control">
               <option value="Asalto">Asalto</option>
               <option value="Acoso">Acoso</option>
       </select>
-    <!--<label for="title">Title</label>-->
-    <!--<input type="text" name="title" id="title" value="{{book.title}}" class="form-control"/>-->
   </div>
 
   <div class="form-group">
-    <label for="author">Author</label>
-    <input type="text" name="author" id="author" value="{{book.author}}" class="form-control"/>
+    <label for="gender">Genero</label>
+    <select name = "gender" value = {{report.gender}} id = "gender" class="form-control">
+      <option value="Masculino">Masculino</option>
+      <option value="Femenino">Femenino</option>
+      <option value="Otro">Otro</option>
+    </select>
   </div>
 
   <div class="form-group">
-    <label for="publishedDate">Date of the event</label>
-    <input type="date" name="publishedDate" id="publishedDate" value="{{book.publishedDate}}" class="form-control"/>
+    <label for="date">Date of the event</label>
+    <input type="date" name="date" id="date" value="{{report.date}}" class="form-control"/>
   </div>
 
   <div class="form-group">
     <label for="description">Description</label>
-    <textarea name="description" id="description" class="form-control">{{book.description}}</textarea>
-  </div>
-
-  <div class="form-group">
-    <label for="image">Cover Image</label>
-    <input type="file" name="image" id="image" class="form-control"/>
-  </div>
-
-  <div class="form-group hidden">
-    <label for="imageUrl">Cover Image URL</label>
-    <input type="text" name="imageUrl" id="imageUrl" value="{{book.imageUrl}}" class="form-control"/>
+    <textarea name="description" id="description" class="form-control">{{report.description}}</textarea>
   </div>
 
   <div class="form-group hidden">
     <label for="createdBy">Created by</label>
-    <input type="text" name="createdBy" id="createdBy" value="{{book.createdBy}}" class="form-control"/>
+    <input type="text" name="createdBy" id="createdBy" value="{{report.createdBy}}" class="form-control"/>
   </div>
 
   <div class="form-group hidden">
     <label for="createdById">Created by ID</label>
-    <input type="text" name="createdById" id="createdById" value="{{book.createdById}}" class="form-control"/>
+    <input type="text" name="createdById" id="createdById" value="{{report.createdById}}" class="form-control"/>
   </div>
 
   <button type="submit" class="btn btn-success">Save</button>

@@ -36,38 +36,38 @@ def from_sql(row):
     return data
 
 
-class Book(db.Model):
-    __tablename__ = 'books'
+class Report(db.Model):
+    __tablename__ = 'reports'
 
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(255))
     author = db.Column(db.String(255))
-    publishedDate = db.Column(db.String(255))
-    imageUrl = db.Column(db.String(255))
-    description = db.Column(db.String(4096))
+    date = db.Column(db.String(255))
+    gender = db.Column(db.String(255))
+    # imageUrl = db.Column(db.String(255))
+    crime = db.Column(db.String(4096))
     createdBy = db.Column(db.String(255))
     createdById = db.Column(db.String(255))
 
     def __repr__(self):
-        return "<Book(title='%s', author=%s)" % (self.title, self.author)
+        return "<Report(crime='%s', gender=%s)" % (self.crime, self.gender)
 
 
 def list(limit=10, cursor=None):
     cursor = int(cursor) if cursor else 0
-    query = (Book.query
-             .order_by(Book.title)
+    query = (Report.query
+             .order_by(Report.title)
              .limit(limit)
              .offset(cursor))
-    books = builtin_list(map(from_sql, query.all()))
-    next_page = cursor + limit if len(books) == limit else None
-    return (books, next_page)
+    reports = builtin_list(map(from_sql, query.all()))
+    next_page = cursor + limit if len(reports) == limit else None
+    return (reports, next_page)
 
 
 def list_by_user(user_id, limit=10, cursor=None):
     cursor = int(cursor) if cursor else 0
-    query = (Book.query
+    query = (Report.query
              .filter_by(createdById=user_id)
-             .order_by(Book.title)
+             .order_by(Report.title)
              .limit(limit)
              .offset(cursor))
     books = builtin_list(map(from_sql, query.all()))
@@ -76,29 +76,29 @@ def list_by_user(user_id, limit=10, cursor=None):
 
 
 def read(id):
-    result = Book.query.get(id)
+    result = Report.query.get(id)
     if not result:
         return None
     return from_sql(result)
 
 
 def create(data):
-    book = Book(**data)
-    db.session.add(book)
+    report = Report(**data)
+    db.session.add(report)
     db.session.commit()
-    return from_sql(book)
+    return from_sql(report)
 
 
 def update(data, id):
-    book = Book.query.get(id)
+    report = Report.query.get(id)
     for k, v in data.items():
-        setattr(book, k, v)
+        setattr(report, k, v)
     db.session.commit()
-    return from_sql(book)
+    return from_sql(report)
 
 
 def delete(id):
-    Book.query.filter_by(id=id).delete()
+    Report.query.filter_by(id=id).delete()
     db.session.commit()
 
 

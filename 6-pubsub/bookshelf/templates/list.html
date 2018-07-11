@@ -19,29 +19,29 @@
 {% block content %}
 
 <h3>Reports</h3>
-<a href="/books/add" class="btn btn-success btn-sm">
+<a href="/reports/add" class="btn btn-success btn-sm">
   <i class="glyphicon glyphicon-plus"></i>
   Add Report
 </a>
 
-{% for book in books %}
+{% for report in reports %}
 <div class="media">
-  <a href="/books/{{book.id}}">
+  <a href="/reports/{{report.id}}">
     <div class="media-left">
-      {% if book.imageUrl %}
-        <img src="{{book.imageUrl}}">
+      {% if report.imageUrl %}
+        <img src="{{report.imageUrl}}">
       {% else %}
         <img src="http://placekitten.com/g/128/192">
       {% endif %}
     </div>
     <div class="media-body">
-      <h4>{{book.title}}</h4>
-      <p>{{book.author}}</p>
+      <h4>{{report.crime}}</h4>
+      <p>{{report.crime}}</p>
     </div>
   </a>
 </div>
 {% else %}
-<p>No books found</p>
+<p>No reports found</p>
 {% endfor %}
 
 {% if next_page_token %}
